@@ -21,7 +21,7 @@ y_pred = model.predict(X_test)
 r2 = r2_score(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
 
-print(f"Model trained successfully for first time checking and automatimg the pipeline")
+print(f"Model trained successfully for first time checking and automating the pipeline")
 print(f"R2 Score: {r2:.3f}")
 print(f"MSE: {mse:.3f}")
 
