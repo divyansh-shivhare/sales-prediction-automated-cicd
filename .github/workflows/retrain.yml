@@ -1,0 +1,38 @@
+name: Retrain-and-Build
+
+on:
+  push:
+    paths:
+      - 'data/**'
+  schedule:
+    - cron: '0 2 * * *'  # daily at 02:00 UTC
+  workflow_dispatch:
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Retrain (if data changed)
+        run: python retrain.py
+      - name: Build Docker image
+        env:
+          IMAGE: ${{ secrets.REGISTRY_IMAGE }}
+        run: |
+          docker build -t $IMAGE:latest .
+      - name: Login to registry (optional)
+        if: secrets.REGISTRY_USERNAME != '' && secrets.REGISTRY_PASSWORD != ''
+        run: |
+          echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.REGISTRY_USERNAME }}" --password-stdin ${{ secrets.REGISTRY_HOST }}
+      - name: Push image (optional)
+        if: secrets.REGISTRY_IMAGE != ''
+        run: |
+          docker tag $IMAGE:latest $IMAGE:${{ github.sha }}
+          docker push $IMAGE:latest
+          docker push $IMAGE:${{ github.sha }}
