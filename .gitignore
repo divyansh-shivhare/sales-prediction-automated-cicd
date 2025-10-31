@@ -1,0 +1,81 @@
+# -----------------------------
+# Python and virtual environment
+# -----------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.tmp
+*.swp
+*.bak
+*.egg-info/
+.env
+.venv/
+venv/
+ENV/
+env/
+
+# -----------------------------
+# Data and model artifacts
+# -----------------------------
+model.pkl
+models/
+data/last_retrain.txt
+
+# -----------------------------
+# DVC / ML / Cache directories
+# -----------------------------
+.dvc/
+.mlflow/
+.cache/
+checkpoints/
+artifacts/
+runs/
+
+# -----------------------------
+# OS generated files
+# -----------------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------------
+# Jupyter and notebooks
+# -----------------------------
+.ipynb_checkpoints/
+
+# -----------------------------
+# Docker
+# -----------------------------
+*.tar
+*.pid
+*.log
+docker-compose.override.yml
+
+# -----------------------------
+# IDE / Editor files
+# -----------------------------
+.vscode/
+.idea/
+*.code-workspace
+
+# -----------------------------
+# Build and distribution
+# -----------------------------
+build/
+dist/
+*.egg
+*.egg-info/
+
+# -----------------------------
+# Local test files or outputs
+# -----------------------------
+*.out
+*.txt~
+*.zip
+*.rar
+
+# -----------------------------
+# GitHub Actions runner artifacts
+# -----------------------------
+.github/workflows/*.log
